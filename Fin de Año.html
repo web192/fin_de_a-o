@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celebración de Fin de Año</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0d47a1, #1976d2, #42a5f5);
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      color: #FFCC80;
+    }
+
+    #countdown {
+      font-size: 3em;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 40px 80px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      margin-bottom: 30px;
+      color: #FFCC80;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    #countdown span {
+      margin: 0 10px;
+      font-size: 1.5em;
+      padding: 10px;
+      background-color: #FF9800;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    /* Efecto de animación */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .message {
+      font-size: 1.8em;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+      color: #FFCC80;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 1em;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    footer a {
+      color: #FFCC80;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      color: white;
+      background-color: #FF9800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e68900;
+      transform: scale(1.1);
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Media Queries para dispositivos más pequeños */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 3em;
+      }
+
+      #countdown {
+        font-size: 2.5em;
+        padding: 30px 60px;
+      }
+
+      #countdown span {
+        font-size: 1.2em;
+        padding: 8px;
+      }
+
+      button {
+        font-size: 1.3em;
+        padding: 12px 25px;
+      }
+
+      footer {
+        font-size: 0.9em;
+      }
+
+      .message {
+        font-size: 1.5em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      #countdown {
+        font-size: 2.2em;
+        padding: 25px 50px;
+      }
+
+      #countdown span {
+        font-size: 1.1em;
+        padding: 6px;
+      }
+
+      button {
+        font-size: 1.2em;
+        padding: 10px 20px;
+      }
+
+      footer {
+        font-size: 0.8em;
+      }
+
+      .message {
+        font-size: 1.2em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      #countdown {
+        font-size: 2em;
+        padding: 20px 40px;
+      }
+
+      #countdown span {
+        font-size: 1em;
+        padding: 5px;
+      }
+
+      button {
+        font-size: 1em;
+        padding: 10px 15px;
+      }
+
+      footer {
+        font-size: 0.7em;
+      }
+
+      .message {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Despidamos el Año y Recibamos el Nuevo 🎉</h1>
+  
+  <div class="countdown-container">
+    <div id="countdown">
+      <span id="days">00</span> días
+      <span id="hours">00</span> horas
+      <span id="minutes">00</span> minutos
+      <span id="seconds">00</span> segundos
+    </div>
+    <div class="message" id="message"></div>
+  </div>
+
+  <div class="fireworks" id="fireworks"></div>
+
+  <button id="playMusicButton">🎵 ¡Vamos a Celebrar! Reproducir Música</button>
+
+  <footer>
+    Gracias a todos los que me han acompañado en este año lleno de aprendizajes, retos y logros. Cada momento compartido ha sido invaluable. ¡Espero seguir creciendo juntos en el próximo año! <a href="#" id="celebrate">¡Feliz Año Nuevo!</a>
+  </footer>
+
+  <audio id="newYearAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop preload="auto"></audio>
+
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    const messageElement = document.getElementById('message');
+    const audioElement = document.getElementById('newYearAudio');
+    const playMusicButton = document.getElementById('playMusicButton');
+    const celebrateLink = document.getElementById('celebrate');
+
+    playMusicButton.addEventListener('click', () => {
+      audioElement.play();
+      playMusicButton.style.display = 'none'; // Ocultar el botón después de iniciar la música
+      messageElement.textContent = "🎉 Música en marcha... ¡A disfrutar! 🎶";
+    });
+
+    celebrateLink.addEventListener('click', () => {
+      showFireworks();
+      messageElement.textContent = "🌟 ¡Que este nuevo año esté lleno de éxitos y felicidad! 🌟";
+    });
+
+    // Configuración del tiempo
+    const targetDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.textContent = "¡Feliz Año Nuevo! 🎉";
+        messageElement.textContent = "🌟 Que este nuevo año traiga felicidad, salud y éxito 🌟";
+        clearInterval(countdownInterval);
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        daysElement.textContent = days < 10 ? `0${days}` : days;
+        hoursElement.textContent = hours < 10 ? `0${hours}` : hours;
+        minutesElement.textContent = minutes < 10 ? `0${minutes}` : minutes;
+        secondsElement.textContent = seconds < 10 ? `0${seconds}` : seconds;
+      }
+    }
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function showFireworks() {
+      const fireworksContainer = document.getElementById('fireworks');
+      for (let i = 0; i < 15; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.position = 'absolute';
+        firework.style.top = `${Math.random() * 100}%`;
+        firework.style.left = `${Math.random() * 100}%`;
+        firework.style.width = '10px';
+        firework.style.height = '10px';
+        firework.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        firework.style.borderRadius = '50%';
+        firework.style.animation = 'explode 1.5s ease-out';
+        firework.style.opacity = '0';
+        fireworksContainer.appendChild(firework);
+
+        setTimeout(() => firework.remove(), 1500);
+      }
+    }
+  </script>
+</body>
+</html>
